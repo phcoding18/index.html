@@ -1,293 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>...</title>
+<meta charset="UTF-8">
+<title>Payroll Infographic</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-html, body {
-  height: 100%;
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  overflow-y: auto;
-  position: relative;
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 30px;
+    color: #2d2d2d;
 }
 
-/* Card container */
-#mainContent {
-  padding: 50px 15px;
-  max-width: 600px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1; /* above hearts */
+.container {
+    max-width: 1100px;
+    margin: auto;
 }
 
-/* Card */
+h2 {
+    text-align: center;
+    color: #3a3a3a;
+    margin-bottom: 40px;
+    font-size: 34px;
+    font-weight: 700;
+}
+
+/* CARDS */
 .card {
-  border-radius: 20px;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-  background: rgba(255,255,255,0.95);
-  padding: 2rem 2.5rem;
-  text-align: center;
+    display: flex;
+    padding: 25px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+    background: #ffffff;
+    transition: 0.3s;
 }
 
-/* Title */
-.title {
-  font-family: 'Pacifico', cursive;
-  font-size: 2.5rem;
-  color: #ff4d6d;
+.card:hover {
+    border-left: 6px solid #facc15;
 }
 
-/* 💕 Couple photo */
-.couple-photo {
-  width: 160px;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin: 15px auto 20px;
-  border: 5px solid #ff4d6d;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+.card-icon {
+    font-size: 36px;
+    color: white;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 25px;
+    background: linear-gradient(135deg, #6b7280, #374151);
 }
 
-/* Heart container */
-#heartContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3000px; /* adjust for page length */
-  pointer-events: none;
-  overflow: visible;
-  z-index: 0; /* behind content */
+.card-content h3 {
+    font-size: 20px;
+    font-weight: 700;
 }
 
-/* Hearts */
-.heart {
-  position: absolute;
-  color: #ff1e56;
-  opacity: 0.8;
-  pointer-events: none;
-  animation: float 6s linear forwards;
+.card-content p,
+.card-content ul li {
+    font-size: 15px;
 }
 
-@keyframes float {
-  from { transform: translateY(0) scale(1); opacity: 1; }
-  to { transform: translateY(-120vh) scale(1.5); opacity: 0; }
+/* TEXT INTERACTION */
+.card-content span {
+    display: inline-block;
+    padding: 3px 6px;
+    border-radius: 4px;
+    transition: 0.25s;
+    cursor: pointer;
 }
 
-/* Buttons */
-.btn-love {
-  background: #ff4d6d;
-  color: #fff;
-  border-radius: 30px;
-  padding: 10px 25px;
-  border: none;
+.card-content span:hover {
+    background: #facc15;
+    color: #000;
 }
 
-.btn-love:hover {
-  background: #d012ff;
-  transform: scale(1.05);
+.card-content span.active {
+    background: #eab308;
+    color: #000;
+    outline: 2px solid #000;
 }
 
-.hidden-message {
-  display: none;
+/* PERCENTAGE STYLE */
+.percent {
+    font-weight: 700;
+    color: #b45309;
 }
 
-.landscape {
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: all 1s ease;
+/* TABLE */
+.pay-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 40px;
+    font-size: 16px;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
-.landscape.show {
-  opacity: 1;
-  max-height: 1000px;
+.pay-table th, .pay-table td {
+    border: 1px solid #d4d4d4;
+    padding: 14px 10px;
+    text-align: center;
 }
 
-.text-date-green {
-  color: #000000d0;
-  font-weight: 600;
+.pay-table thead {
+    background: #9ca3af;
+    color: #111;
+    font-weight: 700;
+    font-size: 16px;
 }
 
-/* Motor */
-#motor {
-  position: fixed;
-  bottom: 50px;
-  left: -100px;
-  font-size: 2rem;
-  transition: left 5s linear;
-  display: none;
+.pay-table tbody tr:nth-child(odd) {
+    background: #f9fafb;
 }
 
-#motorText {
-  position: fixed;
-  bottom: 90px;
-  left: 10px;
-  color: #fff;
-  display: none;
-  text-shadow: 1px 1px 3px #000;
+.highlight-parttime {
+    background: #e5e7eb !important;
+    font-weight: 600;
 }
 
-/* Password overlay */
-#passwordOverlay {
-  position: fixed;
-  inset: 0;
-  background: #323232;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 2000;
-  color: #fff;
+.highlight-fulltime {
+    background: #d1d5db !important;
+    font-weight: 600;
 }
 
-#passwordOverlay input {
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  margin-top: 10px;
-  width: 200px;
-  text-align: center;
+.pay-table tbody tr:hover {
+    background: #facc15;
+    color: #000;
+    cursor: pointer;
 }
 
-#passwordOverlay button {
-  margin-top: 10px;
-  padding: 8px 20px;
-  border-radius: 20px;
-  background: #000000c0;
-  border: none;
-  color: #fff;
+.pay-table tbody tr.active {
+    background: #eab308 !important;
+    color: #000;
+    outline: 3px solid #000;
+}
+
+/* IMPORTANT NUMBERS */
+.pay-table td:nth-child(2),
+.pay-table td:last-child {
+    font-weight: 700;
+    font-size: 17px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .card {
+        flex-direction: column;
+    }
+    .card-icon {
+        margin-bottom: 15px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- Heart container -->
-<div id="heartContainer"></div>
+<div class="container">
+<h2>PAYROLL INFOGRAPHIC SUMMARY</h2>
 
-<!-- Password Overlay -->
-<div id="passwordOverlay">
-  <h2>BIRTHMONTH</h2>
-  <input type="password" id="userPassword" placeholder="MMDDYYYY">
-  <button onclick="checkPassword()">Enter</button>
-  <p id="passMsg" style="display:none;color:#ffffff;margin-top:10px;">Wrong password </p>
-</div>
-
-<!-- Main content -->
-<div id="mainContent">
-  <div class="card">
-
-    <h1 class="title">Hi, I Have Something to Ask You 💗</h1>
-
-    <!-- 💑 COUPLE PHOTO -->
-    <img src="OURPICS.jpg" alt="Us Together" class="couple-photo">
-
-    <p class="fs-5">I just want to be honest with you.</p>
-    <p class="text-muted">
-      I’m not interested in anyone else. My intentions are sincere, and they’re meant only for you 💕
-    </p>
-
-    <button class="btn btn-love mt-3" onclick="showMessage()">
-      Can I Take You on a Date? 💌
-    </button>
-
-    <div id="message" class="hidden-message mt-3">
-      <p>🌹 From the heart 🌹</p>
-      <p>I promise to respect you, value your time, and be honest with my intentions.</p>
-
-      <p class="fw-semibold">Would you like to go on a date with me? ❤️</p>
-
-      <div class="d-flex justify-content-center gap-3 position-relative" style="height:60px;">
-        <button class="btn btn-success px-4" onclick="yesAnswer()">YES </button>
-        <button id="noBtn" class="btn btn-danger px-4 position-absolute">NO </button>
-      </div>
-
-      <p id="yesMsg" class="fw-semibold text-success mt-3" style="display:none;">
-        Nuksss! 💕 I’m really happy you said yes 😍
-      </p>
-
-      <div id="dateDetails" class="landscape mt-4">
-        <h4 class="text-date-green">Our Date Is Set ❤️</h4>
-        <p>📍 Your Favorite Samgyupsal</p>
-        <p>📅 February 14, 2026</p>
-        <p>⏰ 6:00 PM</p>
-        <p class="text-date-green">I’ll pick you up at 5 PM! 🏍️</p>
-
-        <div class="ratio ratio-21x9 rounded overflow-hidden shadow">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2295.859613260566!2d121.03230989071234!3d14.589943594745876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c935abdc821d%3A0x198e5d888fc211ef!2sDGP%20Samgyuniku!5e0!3m2!1sen!2sph!4v1770526659168!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-
-        <p class="mt-3 text-muted">See you soon — BUSH 💕</p>
-      </div>
+<!-- CARD 1 -->
+<div class="card">
+    <div class="card-icon"><i class="fas fa-money-bill-wave"></i></div>
+    <div class="card-content">
+        <h3><span>Gross Pay</span></h3>
+        <p><span>Total income an employee earns <b>before deductions</b>.</span></p>
+        <ul>
+            <li><span>Daily: Rate × Days Worked</span></li>
+            <li><span>Monthly: Fixed Monthly Rate</span></li>
+            <li><span>Part-time: Hourly Rate × Hours Worked</span></li>
+        </ul>
     </div>
-
-  </div>
 </div>
 
-<!-- Motor animation -->
-<div id="motor">🏍️</div>
-<div id="motorText">I’m picking you up at 5 PM! (Trycicle Yan Wala kasi akong Motor 😅)</div>
+<!-- CARD 2 -->
+<div class="card">
+    <div class="card-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+    <div class="card-content">
+        <h3><span>Deductions</span></h3>
+        <p><span>Amounts subtracted from gross pay:</span></p>
+        <ul>
+            <li><span>Part-time: Only Withholding Tax = <span class="percent">10%</span> of Gross</span></li>
+            <li><span>Full-time (Daily/Monthly):</span>
+                <ul>
+                    <li><span>SSS = <span class="percent">4%</span> of Gross</span></li>
+                    <li><span>PhilHealth = <span class="percent">2%</span> of Gross</span></li>
+                    <li><span>Pag-IBIG = ₱100 fixed</span></li>
+                    <li><span>Withholding Tax = <span class="percent">10%</span> of (Gross - SSS - PhilHealth - Pag-IBIG)</span></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- CARD 3 -->
+<div class="card">
+    <div class="card-icon"><i class="fas fa-wallet"></i></div>
+    <div class="card-content">
+        <h3><span>Net Pay</span></h3>
+        <p><span>Amount the employee receives after all deductions.</span></p>
+        <p><span><b>Net = Gross - Total Deductions</b></span></p>
+    </div>
+</div>
+
+<!-- TABLE -->
+<table class="pay-table">
+<thead>
+<tr>
+<th>Employee Type</th>
+<th>Gross</th>
+<th>SSS</th>
+<th>PhilHealth</th>
+<th>Pag-IBIG</th>
+<th>Withholding Tax</th>
+<th>Total Deduction</th>
+<th>Net Pay</th>
+</tr>
+</thead>
+
+<tbody>
+<tr class="highlight-parttime">
+<td>Part-time</td>
+<td>₱1,000</td>
+<td>₱0</td>
+<td>₱0</td>
+<td>₱0</td>
+<td>₱100</td>
+<td>₱100</td>
+<td>₱900</td>
+</tr>
+
+<tr class="highlight-fulltime">
+<td>Daily (Full-time)</td>
+<td>₱3,475</td>
+<td>₱139</td>
+<td>₱69.50</td>
+<td>₱100</td>
+<td>₱316.65</td>
+<td>₱624.15</td>
+<td>₱2,849.85</td>
+</tr>
+
+<tr class="highlight-fulltime">
+<td>Monthly (Full-time)</td>
+<td>₱10,000</td>
+<td>₱400</td>
+<td>₱200</td>
+<td>₱100</td>
+<td>₱930</td>
+<td>₱1,630</td>
+<td>₱8,370</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 
 <script>
-const PASSWORD = "11102004";
+document.querySelectorAll('.pay-table tbody tr').forEach(row => {
+    row.addEventListener('click', () => {
+        document.querySelectorAll('.pay-table tbody tr').forEach(r => r.classList.remove('active'));
+        row.classList.add('active');
+    });
+});
 
-// Password check
-function checkPassword() {
-  const input = userPassword.value;
-  if (input === PASSWORD) {
-    passwordOverlay.style.display = "none";
-  } else {
-    passMsg.style.display = "block";
-  }
-}
-
-// Show message
-function showMessage() {
-  message.style.display = "block";
-}
-
-// YES button
-function yesAnswer() {
-  yesMsg.style.display = "block";
-  motor.style.display = motorText.style.display = "block";
-  setTimeout(() => motor.style.left = "80vw", 100);
-  setTimeout(() => {
-    motor.style.display = motorText.style.display = "none";
-    dateDetails.classList.add("show");
-  }, 5000);
-}
-
-// Hearts interval (inside container)
-setInterval(() => {
-  const h = document.createElement("div");
-  h.className = "heart";
-  h.innerHTML = "❤️";
-
-  // random horizontal position
-  h.style.left = Math.random() * document.body.clientWidth + "px";
-
-  // start from bottom of viewport
-  h.style.top = window.scrollY + window.innerHeight + "px";
-
-  h.style.fontSize = Math.random() * 20 + 15 + "px";
-
-  document.getElementById("heartContainer").appendChild(h);
-
-  setTimeout(() => h.remove(), 6000);
-}, 300);
-
-// NO button dodging
-document.addEventListener("mousemove", e => {
-  const r = noBtn.getBoundingClientRect();
-  const d = Math.hypot(e.clientX - (r.left + r.width / 2), e.clientY - (r.top + r.height / 2));
-  if (d < 100) noBtn.style.transform = `translate(${Math.random()*200-100}px,${Math.random()*80-40}px)`;
+document.querySelectorAll('.card-content span').forEach(item => {
+    item.addEventListener('click', () => {
+        document.querySelectorAll('.card-content span').forEach(t => t.classList.remove('active'));
+        item.classList.add('active');
+    });
 });
 </script>
 
